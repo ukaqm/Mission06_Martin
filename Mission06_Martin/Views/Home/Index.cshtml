@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model Movie
+
+<!-- Rai Martin Section 002 -->
+<!-- Main Container -->
+
+<div class="container mt-5">
+
+    <!-- Title -->
+    <h1 class="text-center mb-4">The Joel Hilton Film Collection</h1>
+
+    <!-- Joel Image -->
+    <div class="text-center">
+        <img src="/stevehilton.jpeg" class="img-fluid mb-3" alt="Steve Hilton Image" />
+    </div>
+
+    <!-- Link -->
+    <div class="text-center">
+        <a asp-controller="Home" asp-action="MovieDatabase">Click here to add a movie to the collection!</a>
+    </div>
+
+    <!-- Quote -->
+    <div class="text-center">
+        <br />
+        <h4 class="lead">""You know what your problem is, it's that you haven't seen enough movies - all of life's riddles are answered in movies.""'"</h4>
+        <h4>- Steve Martin</h4>
+    </div>
+
+</div>
