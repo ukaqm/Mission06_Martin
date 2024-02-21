@@ -9,7 +9,7 @@ namespace Mission06_Martin.Models
         }
 
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<Movie> Categories { get; set; }
+        public DbSet<Categories> Categories { get; set; }
 
     }
 }

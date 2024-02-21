@@ -38,8 +38,7 @@ namespace Mission06_Martin.Controllers
 
         public IActionResult MovieDatabaseViewPoint()
         {
-            var movies = _context.Movies
-                .Where(x => x.Year == "2010").ToList();
+            var movies = _context.Movies.ToList();
             return View(movies);
         }
     }
