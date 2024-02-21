@@ -15,11 +15,9 @@ namespace Mission06_Martin.Models
         [Required]
         public string Year { get; set; }
 
-        [Required]
-        public string Director { get; set; }
+        public string? Director { get; set; }
 
-        [Required]
-        public string Rating { get; set; }
+        public string? Rating { get; set; }
 
         public string? LentTo { get; set; }
 
@@ -27,8 +25,11 @@ namespace Mission06_Martin.Models
 
         public string? Notes { get; set; }
 
-        [ForeignKey("CategoryId")]
-        public string Category { get; set; }
+        [ForeignKey("Categories")]
+        public int CategoryId { get; set; }
+
+        public Categories Categories { get; set; }
+
 
 
 
