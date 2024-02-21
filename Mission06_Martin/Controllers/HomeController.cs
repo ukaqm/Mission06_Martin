@@ -38,8 +38,8 @@ namespace Mission06_Martin.Controllers
 
         public IActionResult MovieDatabaseViewPoint()
         {
-             ViewBag.movies = _context.Movies.ToList();
-            return View();
+            var movieSet = _context.Movies.Include(x => x.Category).ToList();
+            return View(movieSet);
         }
     }
 }

@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission06_Martin.Models
 {
-    public class Categories
+    public class Category
     {
         [Key]
         [Required]
         public int CategoryId { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        public string CategoryName { get; set; }
 
     }
 }

@@ -28,7 +28,7 @@ namespace Mission06_Martin.Models
         [ForeignKey("Categories")]
         public int CategoryId { get; set; }
 
-        public Categories Categories { get; set; }
+        public Category Category { get; set; }
 
 
 
