@@ -25,6 +25,13 @@ namespace Mission06_Martin.Models
 
         public string? Notes { get; set; }
 
+        [ForeignKey("Categories")]
+        public int CategoryId { get; set; }
+
+        public Categories Categories { get; set; }
+
+
+
 
     }
 
