@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission06_Martin.Models;
 using System.Diagnostics;
 
@@ -22,12 +23,12 @@ namespace Mission06_Martin.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult MovieDatabase()
+        public IActionResult JoelHiltonMovieCollection()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult MovieDatabase(Movie response)
+        public IActionResult JoelHiltonMovieCollection(Movie response)
         {
 
             _context.Movies.Add(response);
@@ -35,6 +36,11 @@ namespace Mission06_Martin.Controllers
             return View("Confirmation", response);
         }
 
-
+        public IActionResult MovieDatabaseViewPoint()
+        {
+            var movies = _context.Movies
+                .Where(x => x.Year == "2010").ToList();
+            return View(movies);
+        }
     }
 }

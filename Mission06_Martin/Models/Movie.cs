@@ -1,36 +1,37 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission06_Martin.Models
 {
     public class Movie
     {
         [Key]
-        [Required(ErrorMessage = "Movie ID is required.")]
-        public int movieID { get; set; }
+        [Required]
+        public int MovieId { get; set; }
 
-        [Required(ErrorMessage = "Movie category is required.")]
-        public string movieCategory { get; set; }
+        [Required]
+        public string Title { get; set; }
 
-        [Required(ErrorMessage = "Movie title is required.")]
-        public string movieTitle { get; set; }
+        [Required]
+        public string Year { get; set; }
 
-        [Required(ErrorMessage = "Movie year is required.")]
-        [Range(1900, 2100, ErrorMessage = "Year must be between 1900 and 2100.")]
-        public int movieYear { get; set; }
+        [Required]
+        public string Director { get; set; }
 
-        [Required(ErrorMessage = "Movie director is required.")]
-        public string movieDirector { get; set; }
+        [Required]
+        public string Rating { get; set; }
 
-        [Required(ErrorMessage = "Movie rating is required.")]
-        [RegularExpression("(G|PG|PG-13|R)", ErrorMessage = "Invalid rating. Valid ratings are: G, PG, PG-13, R.")]
-        public string movieRating { get; set; }
+        public string? LentTo { get; set; }
 
-        public string? movieLentTo { get; set; }
+        public bool? Edited { get; set; }
 
-        public bool? movieEdited { get; set; }
+        public string? Notes { get; set; }
 
-        [StringLength(25, ErrorMessage = "Notes cannot be more than 25 characters long.")]
-        public string? movieNotes { get; set; }
+        [ForeignKey("CategoryId")]
+        public string Category { get; set; }
+
+
+
     }
 
 }
