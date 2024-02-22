@@ -25,21 +25,42 @@ namespace Mission06_Martin.Controllers
         [HttpGet]
         public IActionResult JoelHiltonMovieCollection()
         {
+            ViewBag.categories = _context.Categories.ToList();
             return View();
         }
         [HttpPost]
-        public IActionResult JoelHiltonMovieCollection(Movie response)
+        public IActionResult JoelHiltonMovieCollection(Movie movie)
         {
 
-            _context.Movies.Add(response);
+            _context.Movies.Add(movie);
             _context.SaveChanges();
-            return View("Confirmation", response);
+            return View("Confirmation", movie);
         }
 
         public IActionResult MovieDatabaseViewPoint()
         {
             var movieSet = _context.Movies.Include(x => x.Category).ToList();
             return View(movieSet);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.categories = _context.Categories.ToList();
+
+            return View("JoelHiltonMovieCollection", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Movie updatedMovie)
+        {
+            _context.Update(updatedMovie);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieDatabaseViewPoint");
         }
     }
 }

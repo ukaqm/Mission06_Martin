@@ -21,7 +21,11 @@ namespace Mission06_Martin.Models
 
         public string? LentTo { get; set; }
 
-        public bool? Edited { get; set; }
+        [Required]
+        public bool Edited { get; set; }
+
+        [Required]
+        public int CopiedToPlex { get; set; }
 
         public string? Notes { get; set; }
 
