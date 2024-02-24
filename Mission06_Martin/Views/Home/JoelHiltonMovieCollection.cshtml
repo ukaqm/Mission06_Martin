@@ -15,24 +15,8 @@
             <!-- Movie Form -->
             <form method="post">
 
-                <label asp-for="MovieId"></label>
-                <input asp-for="MovieId" />
-
-                <div class="form-group">
-                    <label>Select a category</label>
-                    <select asp-for="CategoryId" class="form-control">
-                        <option value="">Select a Category</option>
-                        @foreach (Category c in ViewBag.categories)
-                        {
-                            <option value="@c.CategoryId">@c.CategoryName</option>
-                        }
-
-
-
-                    </select>
-                </div>
-
-
+                
+                <input type="hidden" asp-for="MovieId" />
 
                 <!-- Movie Title -->
                 <div class="form-group">
@@ -72,9 +56,23 @@
                 </div>
                 <br />
 
+                <!-- Movie Rating Dropdown \ Uses ViewBag to access the Categories table -->
+                <div class="form-group">
+                    <label asp-for="CategoryId">Category:</label>
+                    <select asp-for="CategoryId" class="form-control">
+                        <option value="">Select a Category</option>
+                        @foreach (Category c in ViewBag.categories)
+                        {
+                            <option value="@c.CategoryId">@c.CategoryName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <br />
+
                 <!-- Copied to Plex (Yes/No Radio Buttons) -->
                 <div class="form-group">
-                    <label>Copied on Plex?</label>
+                    <label>Copied on Plex:</label>
                     <div>
                         <div class="form-check form-check-inline">
                             <input asp-for="CopiedToPlex" class="form-check-input" type="radio" id="movieCopiedYes" value="true">
@@ -124,6 +122,8 @@
 
                 <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div asp-validation-summary="All"></div>
 
             </form>
 

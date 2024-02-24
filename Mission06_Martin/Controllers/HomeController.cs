@@ -26,15 +26,22 @@ namespace Mission06_Martin.Controllers
         public IActionResult JoelHiltonMovieCollection()
         {
             ViewBag.categories = _context.Categories.ToList();
-            return View();
+            return View("JoelHiltonMovieCollection", new Movie());
         }
         [HttpPost]
         public IActionResult JoelHiltonMovieCollection(Movie movie)
         {
-
-            _context.Movies.Add(movie);
-            _context.SaveChanges();
-            return View("Confirmation", movie);
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Add(movie);
+                _context.SaveChanges();
+                return View("Confirmation", movie);
+            }
+            else
+            {
+                ViewBag.categories = _context.Categories.ToList();
+                return View(movie);
+            }
         }
 
         public IActionResult MovieDatabaseViewPoint()
@@ -62,5 +69,26 @@ namespace Mission06_Martin.Controllers
 
             return RedirectToAction("MovieDatabaseViewPoint");
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.categories = _context.Categories.ToList();
+
+            return View(recordToDelete); 
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Movie updatedMovie)
+        {
+            _context.Movies.Remove(updatedMovie);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieDatabaseViewPoint");
+        }
+
     }
 }
