@@ -25,22 +25,70 @@ namespace Mission06_Martin.Controllers
         [HttpGet]
         public IActionResult JoelHiltonMovieCollection()
         {
-            return View();
+            ViewBag.categories = _context.Categories.ToList();
+            return View("JoelHiltonMovieCollection", new Movie());
         }
         [HttpPost]
-        public IActionResult JoelHiltonMovieCollection(Movie response)
+        public IActionResult JoelHiltonMovieCollection(Movie movie)
         {
-
-            _context.Movies.Add(response);
-            _context.SaveChanges();
-            return View("Confirmation", response);
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Add(movie);
+                _context.SaveChanges();
+                return View("Confirmation", movie);
+            }
+            else
+            {
+                ViewBag.categories = _context.Categories.ToList();
+                return View(movie);
+            }
         }
 
         public IActionResult MovieDatabaseViewPoint()
         {
-            ViewBag.categories = _context.Categories.ToList();
-            ViewBag.movies = _context.Movies.ToList();
-            return View();
+            var movieSet = _context.Movies.Include(x => x.Category).ToList();
+            return View(movieSet);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.categories = _context.Categories.ToList();
+
+            return View("JoelHiltonMovieCollection", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Movie updatedMovie)
+        {
+            _context.Update(updatedMovie);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieDatabaseViewPoint");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.categories = _context.Categories.ToList();
+
+            return View(recordToDelete); 
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Movie updatedMovie)
+        {
+            _context.Movies.Remove(updatedMovie);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieDatabaseViewPoint");
+        }
+
     }
 }

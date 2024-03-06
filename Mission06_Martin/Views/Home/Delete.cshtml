@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Confirmation Deletion";
+}
+
+@model Movie
+
+<!-- Rai Martin Section 002 -->
+<!-- Confirmation for deletion page -->
+
+<h2>Confirm Deletion</h2>
+<h3>Are you sure you want to remove the "@Model.Title" from the collection?</h3>
+<form method="post">
+    <input type="hidden" asp-for="MovieId" />
+    <button type="submit">Delete</button>
+    <a class="btn btn-info" asp-controller="Home" asp-actions="MovieDatabaseViewPoint">Cancel</a>
+</form>

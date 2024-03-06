@@ -13,7 +13,8 @@ namespace Mission06_Martin.Models
         public string Title { get; set; }
 
         [Required]
-        public string Year { get; set; }
+        [Range(1888, int.MaxValue, ErrorMessage = "Please enter a valid year. (1888 to current year)")]
+        public string Year { get; set; } 
 
         public string? Director { get; set; }
 
@@ -21,14 +22,18 @@ namespace Mission06_Martin.Models
 
         public string? LentTo { get; set; }
 
-        public bool? Edited { get; set; }
+        [Required]
+        public bool Edited { get; set; }
+
+        [Required]
+        public bool CopiedToPlex { get; set; }
 
         public string? Notes { get; set; }
 
         [ForeignKey("Categories")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
-        public Categories Categories { get; set; }
+        public Category? Category { get; set; }
 
 
 
